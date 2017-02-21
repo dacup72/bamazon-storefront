@@ -43,7 +43,18 @@ function promptCustomerForItem(inventory) {
       }
     ])
     .then(function(val) {
-      
+      // TODO Check if the user wants to quit the program
+
+      var choiceId = parseInt(val.choice);
+      var product = checkInventory(choiceId, inventory);
+
+      if (product) {
+        // Check for quantity
+      }
+      else {
+        console.log("\nThat item is not in the inventory.");
+        loadProducts();
+      }
     });
 }
 
