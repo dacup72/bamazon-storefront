@@ -1,0 +1,19 @@
+{
+  "name": "bamazon-storefront",
+  "version": "1.0.0",
+  "description": "",
+  "main": "bamazonCustomer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dacup72/bamazon-storefront.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dacup72/bamazon-storefront/issues"
+  },
+  "homepage": "https://github.com/dacup72/bamazon-storefront#readme"
+}

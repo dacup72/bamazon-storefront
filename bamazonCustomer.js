@@ -11,8 +11,7 @@ var connection = mysql.createConnection({
 
 connection.connect(function(err) {
   if (err) throw err;
-  displayStore();
-  purchase();
+  setTimeout(()=> start(), 50);
 });
 
 function displayStore() {
@@ -24,38 +23,64 @@ function displayStore() {
     console.log("===================================");
     console.log("");
   });
+  purchase();
 }
 
-function purchase() {
+function start() {
   inquirer
   .prompt([
     {
-      name: "buyItem",
-      type: "input",
-      message: "Input the item ID of the product you wish to purchase.",
-      validate: function(value) {
-        if (isNaN(value) === false) {
-          return true;
-        }
-        return false;
-      }
-    },
-    {
-      name: "quantity",
-      type: "input",
-      message: "How many do you want to buy?",
-      validate: function(value) {
-        if (isNaN(value) === false) {
-          return true;
-        }
-        return false;
-      }
+      name: "startChoices",
+      type: "list",
+      message: "What would you like to do?",
+      choices: ["Shop", "Exit"]
     }
-  ])
-  .then(function(answer) {
-    var query = "SELECT productName FROM products WHERE itemId = ?";
-    connection.query(query, { itemId: answer.buyItem }, function(err, res) {
-      console.log(res);
+  ]).then(function(answer) {
+    if (answer.startChoices == "Shop") {
+      displayStore();
+    } else {
+      console.log('Get out of my sight!');
+      process.exit();
+    }
+  });
+}
+
+function purchase() {
+  connection.query(query, function(err, res) {
+    if (err) throw err;
+    inquirer
+    .prompt([
+      {
+        name: "item",
+        type: "input",
+        message: "Input the item ID of the product you wish to purchase.",
+        validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          return false;
+        }
+      },
+      {
+        name: "quantity",
+        type: "input",
+        message: "How many do you want to buy?",
+        validate: function(value) {
+          if (isNaN(value) === false) {
+            return true;
+          }
+          return false;
+        }
+      }
+    ])
+    .then(function(answer) {
+      var chosenItem;
+      for (var i = 0; i < res.length; i++) {
+        if (res[i].itemId === answer.item) {
+          chosenItem = results[i].productName;
+          console.log(chosenItem);
+        }
+      }
     });
   });
 }
