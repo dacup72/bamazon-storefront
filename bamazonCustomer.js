@@ -39,27 +39,28 @@ function start() {
     if (answer.startChoices == "Shop") {
       displayStore();
     } else {
-      console.log('Get out of my sight!');
+      console.log("Get out of my sight! I don't need you munies!");
       process.exit();
     }
   });
 }
 
 function purchase() {
-  connection.query(query, function(err, res) {
+  connection.query('SELECT * FROM products', function(err, res) {
     if (err) throw err;
     inquirer
     .prompt([
       {
-        name: "item",
-        type: "input",
-        message: "Input the item ID of the product you wish to purchase.",
-        validate: function(value) {
-          if (isNaN(value) === false) {
-            return true;
+        name: "choices",
+        type: "list",
+        choices: function() {
+          var choicesArray = [];
+          for (var i = 0; i < res.length; i++) {
+            choicesArray.push(res[i].productName);
           }
-          return false;
-        }
+          return choicesArray;
+        },
+        message: "Which item would you like to purchase?"
       },
       {
         name: "quantity",
@@ -76,34 +77,30 @@ function purchase() {
     .then(function(answer) {
       var chosenItem;
       for (var i = 0; i < res.length; i++) {
-        if (res[i].itemId === answer.item) {
-          chosenItem = results[i].productName;
-          console.log(chosenItem);
+        if (res[i].productName === answer.choices) {
+          chosenItem = res[i];
         }
       }
-    });
-  });
-}
-
-
-function updateProduct() {
-  console.log("Updating all Rocky Road quantities...\n");
-  var query = connection.query(
-    "UPDATE products SET ? WHERE ?",
-    [
-      {
-        quantity: 100
-      },
-      {
-        flavor: "Rocky Road"
-      }
-    ],
-    function(err, res) {
-      console.log(res.affectedRows + " products updated!\n");
-      // Call deleteProduct AFTER the UPDATE completes
-      deleteProduct();
+      if (chosenItem.stockQuantity - parseInt(answer.quantity) >= 0) {
+        connection.query('UPDATE products SET ? WHERE ?', [
+          {
+            stockQuantity: chosenItem.stockQuantity - parseInt(answer.quantity)
+          },
+          {
+            itemId: chosenItem.itemId
+          }
+        ],
+        function(err) {
+          if(err) throw err;
+          var price = chosenItem.price * parseInt(answer.quantity);
+          console.log("Total price is " + price + " dollars.");
+          start();
+        }
+      );
+    } else {
+      console.log('Not enough stock in the store to make purchase.');
+      start();
     }
-  );
-  // logs the actual query being run
-  console.log(query.sql);
+  });
+});
 }
