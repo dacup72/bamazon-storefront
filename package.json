@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/dacup72/bamazon-storefront/issues"
   },
-  "homepage": "https://github.com/dacup72/bamazon-storefront#readme"
+  "homepage": "https://github.com/dacup72/bamazon-storefront#readme",
+  "dependencies": {
+    "console.table": "^0.10.0",
+    "inquirer": "^6.0.0",
+    "mysql": "^2.16.0"
+  }
 }
