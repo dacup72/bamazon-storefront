@@ -43,18 +43,36 @@ function promptCustomerForItem(inventory) {
       }
     ])
     .then(function(val) {
-      // TODO Check if the user wants to quit the program
-
+      // Check if the user wants to quit the program
+      checkIfShouldExit(val.choice);
       var choiceId = parseInt(val.choice);
       var product = checkInventory(choiceId, inventory);
 
       if (product) {
-        // Check for quantity
+        promptCustomerForQuantity(product);
       }
       else {
         console.log("\nThat item is not in the inventory.");
         loadProducts();
       }
+    });
+}
+
+// Prompt the customer for a product quantity
+function promptCustomerForQuantity(product) {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "quantity",
+        message: "How many would you like? [Quit with Q]",
+        validate: function(val) {
+          return val > 0 || val.toLowerCase() === "q";
+        }
+      }
+    ])
+    .then(function(val) {
+      
     });
 }
 
