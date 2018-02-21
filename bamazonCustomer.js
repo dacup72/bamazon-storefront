@@ -24,9 +24,27 @@ function loadProducts() {
   connection.query("SELECT * FROM products", function(err, res) {
     if (err) throw err;
     console.table(res);
-
-    
+    promptCustomerForItem(res);
   });
+}
+
+// Prompt the customer for a product ID
+function promptCustomerForItem(inventory) {
+  // Prompts user for what they would like to purchase
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "choice",
+        message: "What is the ID of the item you would you like to purchase? [Quit with Q]",
+        validate: function(val) {
+          return !isNaN(val) || val.toLowerCase() === "q";
+        }
+      }
+    ])
+    .then(function(val) {
+      
+    });
 }
 
 
