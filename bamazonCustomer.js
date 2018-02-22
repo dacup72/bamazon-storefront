@@ -30,7 +30,6 @@ function loadProducts() {
 
 // Prompt the customer for a product ID
 function promptCustomerForItem(inventory) {
-  // Prompts user for what they would like to purchase
   inquirer
     .prompt([
       {
@@ -43,7 +42,6 @@ function promptCustomerForItem(inventory) {
       }
     ])
     .then(function(val) {
-      // Check if the user wants to quit the program
       checkIfShouldExit(val.choice);
       var choiceId = parseInt(val.choice);
       var product = checkInventory(choiceId, inventory);
@@ -72,12 +70,27 @@ function promptCustomerForQuantity(product) {
       }
     ])
     .then(function(val) {
-      
+      checkIfShouldExit(val.quantity);
+      var quantity = parseInt(val.quantity);
+
+      if (quantity > product.stock_quantity) {
+        console.log("\nInsufficient quantity!");
+        loadProducts();
+      }
+      else {
+        // TODO make purchase
+      }
     });
 }
 
 
-
+// Check to see if the user wants to quit the program
+function checkIfShouldExit(choice) {
+  if (choice.toLowerCase() === "q") {
+    console.log("Goodbye!");
+    process.exit(0);
+  }
+}
 
 
 
