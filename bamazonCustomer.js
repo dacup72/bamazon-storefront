@@ -11,7 +11,7 @@ var connection = mysql.createConnection({
 });
 
 
-connection.connect(function(err) {
+connection.connect(function (err) {
   if (err) {
     console.error("error connecting: " + err.stack);
   }
@@ -21,7 +21,7 @@ connection.connect(function(err) {
 
 function loadProducts() {
   // Selects all of the data from the MySQL products table
-  connection.query("SELECT * FROM products", function(err, res) {
+  connection.query("SELECT * FROM products", function (err, res) {
     if (err) throw err;
     console.table(res);
     promptCustomerForItem(res);
@@ -36,12 +36,12 @@ function promptCustomerForItem(inventory) {
         type: "input",
         name: "choice",
         message: "What is the ID of the item you would you like to purchase? [Quit with Q]",
-        validate: function(val) {
+        validate: function (val) {
           return !isNaN(val) || val.toLowerCase() === "q";
         }
       }
     ])
-    .then(function(val) {
+    .then(function (val) {
       checkIfShouldExit(val.choice);
       var choiceId = parseInt(val.choice);
       var product = checkInventory(choiceId, inventory);
@@ -64,12 +64,12 @@ function promptCustomerForQuantity(product) {
         type: "input",
         name: "quantity",
         message: "How many would you like? [Quit with Q]",
-        validate: function(val) {
+        validate: function (val) {
           return val > 0 || val.toLowerCase() === "q";
         }
       }
     ])
-    .then(function(val) {
+    .then(function (val) {
       checkIfShouldExit(val.quantity);
       var quantity = parseInt(val.quantity);
 
@@ -78,9 +78,22 @@ function promptCustomerForQuantity(product) {
         loadProducts();
       }
       else {
-        // TODO make purchase
+        makePurchase(product, quantity);
       }
     });
+}
+
+
+// Purchase the desired quantity of the desired item
+function makePurchase(product, quantity) {
+  connection.query(
+    "UPDATE products SET stock_quantity = stock_quantity - ?, product_sales = product_sales + ? WHERE item_id = ?",
+    [quantity, product.price * quantity, product.item_id],
+    function (err, res) {
+      console.log("\nSuccessfully purchased " + quantity + " " + product.product_name + "'s!");
+      loadProducts();
+    }
+  );
 }
 
 
