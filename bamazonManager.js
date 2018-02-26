@@ -20,7 +20,7 @@ connection.connect(function (err) {
 
 // Get product data from the database
 function loadManagerMenu() {
-  connection.query("SELECT * FROM products", function(err, res) {
+  connection.query("SELECT * FROM products", function (err, res) {
     if (err) throw err;
     loadManagerOptions(res);
   });
@@ -36,25 +36,25 @@ function loadManagerOptions(products) {
       choices: ["View Products for Sale", "View Low Inventory", "Add to Inventory", "Add New Product", "Quit"],
       message: "What would you like to do?"
     })
-    .then(function(val) {
+    .then(function (val) {
       switch (val.choice) {
-      case "View Products for Sale":
-        console.table(products);
-        loadManagerMenu();
-        break;
-      case "View Low Inventory":
-        loadLowInventory();
-        break;
-      case "Add to Inventory":
-        addToInventory(products);
-        break;
-      case "Add New Product":
-        addNewProduct(products);
-        break;
-      default:
-        console.log("Goodbye!");
-        process.exit(0);
-        break;
+        case "View Products for Sale":
+          console.table(products);
+          loadManagerMenu();
+          break;
+        case "View Low Inventory":
+          loadLowInventory();
+          break;
+        case "Add to Inventory":
+          addToInventory(products);
+          break;
+        case "Add New Product":
+          addNewProduct(products);
+          break;
+        default:
+          console.log("Goodbye!");
+          process.exit(0);
+          break;
       }
     });
 }
@@ -62,7 +62,7 @@ function loadManagerOptions(products) {
 
 // Query the DB for low inventory products
 function loadLowInventory() {
-  connection.query("SELECT * FROM products WHERE stock_quantity <= 5", function(err, res) {
+  connection.query("SELECT * FROM products WHERE stock_quantity <= 5", function (err, res) {
     if (err) throw err;
     console.table(res);
     loadManagerMenu();
@@ -71,15 +71,29 @@ function loadLowInventory() {
 
 // Prompt the manager for a product to replenish
 function addToInventory(inventory) {
-  
+  console.table(inventory);
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "choice",
+        message: "What is the ID of the item you would you like add to?",
+        validate: function (val) {
+          return !isNaN(val);
+        }
+      }
+    ])
+    .then(function (val) {
+      
+    });
 }
 
 // Ask for the quantity that should be added to the chosen product
 function promptManagerForQuantity(product) {
-  
+
 }
 
 // Gets all departments, then gets the new product info, then inserts the new product into the db
 function addNewProduct() {
-  
+
 }
