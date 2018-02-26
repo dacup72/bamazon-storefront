@@ -62,7 +62,11 @@ function loadManagerOptions(products) {
 
 // Query the DB for low inventory products
 function loadLowInventory() {
-  
+  connection.query("SELECT * FROM products WHERE stock_quantity <= 5", function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    loadManagerMenu();
+  });
 }
 
 // Prompt the manager for a product to replenish
