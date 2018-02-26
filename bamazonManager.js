@@ -15,14 +15,13 @@ connection.connect(function (err) {
   if (err) {
     console.error("error connecting: " + err.stack);
   }
-  loadProducts();
+  loadManagerMenu();
 });
 
-// Get all data from mySQL
-function loadProducts() {
-  connection.query("SELECT * FROM products", function (err, res) {
+// Get product data from the database
+function loadManagerMenu() {
+  connection.query("SELECT * FROM products", function(err, res) {
     if (err) throw err;
-    console.table(res);
     loadManagerOptions(res);
   });
 }
@@ -38,7 +37,45 @@ function loadManagerOptions(products) {
       message: "What would you like to do?"
     })
     .then(function(val) {
-      
+      switch (val.choice) {
+      case "View Products for Sale":
+        console.table(products);
+        loadManagerMenu();
+        break;
+      case "View Low Inventory":
+        loadLowInventory();
+        break;
+      case "Add to Inventory":
+        addToInventory(products);
+        break;
+      case "Add New Product":
+        addNewProduct(products);
+        break;
+      default:
+        console.log("Goodbye!");
+        process.exit(0);
+        break;
+      }
     });
 }
-    
+
+
+// Query the DB for low inventory products
+function loadLowInventory() {
+  
+}
+
+// Prompt the manager for a product to replenish
+function addToInventory(inventory) {
+  
+}
+
+// Ask for the quantity that should be added to the chosen product
+function promptManagerForQuantity(product) {
+  
+}
+
+// Gets all departments, then gets the new product info, then inserts the new product into the db
+function addNewProduct() {
+  
+}
