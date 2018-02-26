@@ -84,7 +84,16 @@ function addToInventory(inventory) {
       }
     ])
     .then(function (val) {
-      
+      var choiceId = parseInt(val.choice);
+      var product = checkInventory(choiceId, inventory);
+
+      if (product) {
+        promptManagerForQuantity(product);
+      }
+      else {
+        console.log("\nThat item is not in the inventory.");
+        loadManagerMenu();
+      }
     });
 }
 
