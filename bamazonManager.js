@@ -106,3 +106,13 @@ function promptManagerForQuantity(product) {
 function addNewProduct() {
 
 }
+
+// Check to see if the product the user chose exists in the inventory
+function checkInventory(choiceId, inventory) {
+  for (var i = 0; i < inventory.length; i++) {
+    if (inventory[i].item_id === choiceId) {
+      return inventory[i];
+    }
+  }
+  return null;
+}
