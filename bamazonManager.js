@@ -99,8 +99,23 @@ function addToInventory(inventory) {
 
 // Ask for the quantity that should be added to the chosen product
 function promptManagerForQuantity(product) {
-
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        name: "quantity",
+        message: "How many would you like to add?",
+        validate: function(val) {
+          return val > 0;
+        }
+      }
+    ])
+    .then(function(val) {
+      var quantity = parseInt(val.quantity);
+      addQuantity(product, quantity);
+    });
 }
+
 
 // Gets all departments, then gets the new product info, then inserts the new product into the db
 function addNewProduct() {
