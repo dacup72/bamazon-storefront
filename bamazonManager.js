@@ -116,6 +116,18 @@ function promptManagerForQuantity(product) {
     });
 }
 
+// Adds the specified quantity to the specified product
+function addQuantity(product, quantity) {
+  connection.query(
+    "UPDATE products SET stock_quantity = ? WHERE item_id = ?",
+    [product.stock_quantity + quantity, product.item_id],
+    function(err, res) {
+      console.log("\nSuccessfully added " + quantity + " " + product.product_name + "'s!\n");
+      loadManagerMenu();
+    }
+  );
+}
+
 
 // Gets all departments, then gets the new product info, then inserts the new product into the db
 function addNewProduct() {
