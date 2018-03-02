@@ -168,6 +168,13 @@ function getProductInfo(departments) {
         return val > 0;
       }
     },
-    
+    {
+      type: "input",
+      name: "quantity",
+      message: "How many do we have?",
+      validate: function(val) {
+        return !isNaN(val);
+      }
+    }
   ]);
 }
