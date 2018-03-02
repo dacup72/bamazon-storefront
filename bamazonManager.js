@@ -160,7 +160,14 @@ function getProductInfo(departments) {
       choices: getDepartmentNames(departments),
       message: "Which department does this product fall into?"
     },
-    
+    {
+      type: "input",
+      name: "price",
+      message: "How much does it cost?",
+      validate: function(val) {
+        return val > 0;
+      }
+    },
     
   ]);
 }
