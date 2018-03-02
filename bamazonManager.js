@@ -105,12 +105,12 @@ function promptManagerForQuantity(product) {
         type: "input",
         name: "quantity",
         message: "How many would you like to add?",
-        validate: function(val) {
+        validate: function (val) {
           return val > 0;
         }
       }
     ])
-    .then(function(val) {
+    .then(function (val) {
       var quantity = parseInt(val.quantity);
       addQuantity(product, quantity);
     });
@@ -121,7 +121,7 @@ function addQuantity(product, quantity) {
   connection.query(
     "UPDATE products SET stock_quantity = ? WHERE item_id = ?",
     [product.stock_quantity + quantity, product.item_id],
-    function(err, res) {
+    function (err, res) {
       console.log("\nSuccessfully added " + quantity + " " + product.product_name + "'s!\n");
       loadManagerMenu();
     }
@@ -131,7 +131,9 @@ function addQuantity(product, quantity) {
 
 // Gets all departments, then gets the new product info, then inserts the new product into the db
 function addNewProduct() {
-
+  getDepartments(function (err, departments) {
+    getProductInfo(departments).then(insertNewProduct);
+  });
 }
 
 // Check to see if the product the user chose exists in the inventory
