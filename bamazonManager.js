@@ -149,7 +149,11 @@ function checkInventory(choiceId, inventory) {
 // Prompts manager for new product info, then adds new product
 function getProductInfo(departments) {
   return inquirer.prompt([
-    
+    {
+      type: "input",
+      name: "product_name",
+      message: "What is the name of the product you would like to add?"
+    },
     
     
     
