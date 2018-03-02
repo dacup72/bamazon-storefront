@@ -154,7 +154,12 @@ function getProductInfo(departments) {
       name: "product_name",
       message: "What is the name of the product you would like to add?"
     },
-    
+    {
+      type: "list",
+      name: "department_name",
+      choices: getDepartmentNames(departments),
+      message: "Which department does this product fall into?"
+    },
     
     
   ]);
