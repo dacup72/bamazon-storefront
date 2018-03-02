@@ -145,3 +145,13 @@ function checkInventory(choiceId, inventory) {
   }
   return null;
 }
+
+// Prompts manager for new product info, then adds new product
+function getProductInfo(departments) {
+  return inquirer.prompt([
+    
+    
+    
+    
+  ]);
+}
