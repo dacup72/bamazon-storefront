@@ -192,3 +192,8 @@ function insertNewProduct(val) {
     }
   );
 }
+
+// Gets all of the departments and runs a callback function when done
+function getDepartments(cb) {
+  connection.query("SELECT * FROM departments", cb);
+}
