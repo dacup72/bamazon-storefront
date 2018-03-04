@@ -178,3 +178,17 @@ function getProductInfo(departments) {
     }
   ]);
 }
+
+
+// Adds new product to the db
+function insertNewProduct(val) {
+  connection.query(
+    "INSERT INTO products (product_name, department_name, price, stock_quantity),
+    [val.product_name, val.department_name, val.price, val.quantity],
+    function(err, res) {
+      if (err) throw err;
+      console.log(val.product_name + " ADDED TO BAMAZON!\n");
+      loadManagerMenu();
+    }
+  );
+}
