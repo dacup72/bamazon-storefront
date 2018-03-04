@@ -183,7 +183,7 @@ function getProductInfo(departments) {
 // Adds new product to the db
 function insertNewProduct(val) {
   connection.query(
-    "INSERT INTO products (product_name, department_name, price, stock_quantity),
+    "INSERT INTO products (product_name, department_name, price, stock_quantity) VALUES (?, ?, ?, ?)",
     [val.product_name, val.department_name, val.price, val.quantity],
     function(err, res) {
       if (err) throw err;
