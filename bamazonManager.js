@@ -197,6 +197,8 @@ function insertNewProduct(val) {
 function getDepartments(cb) {
   connection.query("SELECT * FROM departments", cb);
 }
+
+
 // Is passed an array of departments from the db, then returns an array of just the department names
 function getDepartmentNames(departments) {
   return departments.map(function(department) {
