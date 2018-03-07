@@ -49,3 +49,15 @@ function promptSupervisor() {
       }
     });
 }
+
+
+// Asking the user about the department they would like to add
+function addDepartment() {
+  
+}
+
+
+// Selects a few columns from the departments table, calculates a total_profit column
+function viewSales() {
+  
+}
