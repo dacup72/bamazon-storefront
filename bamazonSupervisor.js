@@ -13,5 +13,19 @@ var connection = mysql.createConnection({
 connection.connect(function(err) {
   if (err) throw err;
   console.log("connection successful!");
-  
+  makeTable();
 });
+
+// Shows table data in database
+function makeTable() {
+  connection.query("SELECT * FROM products", function(err, res) {
+    if (err) throw err;
+    console.table(res);
+    promptSupervisor();
+  });
+}
+
+// Prompt supervisor to ask what they want to do
+function promptSupervisor() {
+  
+}
