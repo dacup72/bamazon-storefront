@@ -53,7 +53,14 @@ function promptSupervisor() {
 
 // Asking the user about the department they would like to add
 function addDepartment() {
-  
+  inquirer
+    .prompt([
+      
+      
+    ])
+    .then(function(val) {
+      
+    });
 }
 
 
