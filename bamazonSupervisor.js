@@ -27,5 +27,25 @@ function makeTable() {
 
 // Prompt supervisor to ask what they want to do
 function promptSupervisor() {
-  
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        name: "choice",
+        message: "What would you like to do?",
+        choices: ["View Product Sales by Department", "Create New Department", "Quit"]
+      }
+    ])
+    .then(function(val) {
+      if (val.choice === "View Product Sales by Department") {
+        viewSales();
+      }
+      else if (val.choice === "Create New Department") {
+        addDepartment();
+      }
+      else {
+        console.log("Goodbye!");
+        process.exit(0);
+      }
+    });
 }
