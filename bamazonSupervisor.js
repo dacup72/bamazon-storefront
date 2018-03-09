@@ -60,7 +60,14 @@ function addDepartment() {
         name: "name",
         message: "What is the name of the department?"
       },
-      
+      {
+        type: "input",
+        name: "overhead",
+        message: "What is the overhead cost of the department?",
+        validate: function(val) {
+          return val > 0;
+        }
+      }
     ])
     .then(function(val) {
       
