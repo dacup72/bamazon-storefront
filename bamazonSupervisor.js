@@ -70,7 +70,14 @@ function addDepartment() {
       }
     ])
     .then(function(val) {
-      
+      connection.query(
+        "INSERT INTO departments (department_name, over_head_costs) VALUES (?, ?)",
+        function(err) {
+          if (err) throw err;
+          console.log("ADDED DEPARTMENT!");
+          makeTable();
+        }
+      );
     });
 }
 
