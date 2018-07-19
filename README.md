@@ -1,87 +1,103 @@
-# Project Title
+# Bamazon Storefront
 
-One Paragraph of project description goes here
+Bamazon is a [Node.js](https://nodejs.org/en/) app the runs through the console and allows for a multi layered store environment to function with mySQL database.  At the customer level users are prompted on the console with [Inquirer.js](https://www.npmjs.com/package/inquirer) to buy products.  On the manager level users are prompted to add inventory and products along with other useful tasks.  On the Supervisor level users can veiw total sales and add product departments.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+These instructions will get you a copy of the project up and running on your local machine for development purposes.
 
 ### Prerequisites
 
 What things you need to install the software and how to install them
 
 ```
-Give examples
+* [Javascript](https://www.javascript.com/)
+* [Node.js](https://nodejs.org/en/)
+* [SQL](https://www.w3schools.com/sql/)
+* [MySQL Workbench](https://www.mysql.com/products/workbench/)
+* [MAMP](https://www.mamp.info/en/)
+* Terminal (Mac) / Git Bash (PC)
 ```
 
 ### Installing
 
 A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
+* Install the prerequisites on your computer
 
 ```
-Give the example
+* Javascript
+* Node.js
+* SQL
+* MySQL Workbench
+* MAMP
+* Terminal (Mac) / Git Bash (PC)
 ```
 
-And repeat
+* Set up localhost SQL server with MySQL Workbench and MAMP
 
 ```
-until finished
+* SQL
+* MySQL Workbench
+* MAMP
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+* Run schema.sql in MySQL Workbench to set up local database and table with seeded information
 
 ```
-Give an example
+* schema.sql file
+* MySQL Workbench
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
+* Use terminal / git bash to run npm install for required npm packages (inquirer, mysql, console.table)
 
 ```
-Give an example
+* $ npm install
 ```
 
-## Deployment
+* Use terminal / git bash to run the javascript files with Node.js
 
-Add additional notes about how to deploy this on a live system
+```
+* $ node bamazonCustomer.js
+* $ node bamazonManager.js
+* $ node bamazonSupervisor.js
+```
+
+## Photo examples of the app running
+
+* Customer purchasing product
+
+![Shot1](./screenshots/bamazonCustomer.png)
+
+* Manager adding new product
+
+![Shot1](./screenshots/bamazonManagerProduct)
+
+* Manager adding more inventory to existing product
+
+![Shot1](./screenshots/bamazonManagerInventory)
+
+* Supervisor checking sales by department
+
+![Shot1](./screenshots/bamazonSupervisorDepartment)
+
+* Supervisor adding new department
+
+![Shot1](./screenshots/bamazonSupervisorSales)
+
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Javascript](https://www.javascript.com/)
+* [Node.js](https://nodejs.org/en/)
+* [Inquirer.js](https://www.npmjs.com/package/inquirer)
+* [SQL](https://www.w3schools.com/sql/)
 
-## Contributing
+## Code Editor: 
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+* [Visual Studio Code](https://code.visualstudio.com/)
 
-## Versioning
+## Authors 
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+* **Dylan Acup** - [Portfolio](https://dacup72.github.io/Dylan-Acup-Portfolio/)
 
-## Authors
-
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
