@@ -71,19 +71,19 @@ A step by step series of examples that tell you how to get a development env run
 
 * Manager adding new product
 
-![Shot1](./screenshots/bamazonManagerProduct)
+![Shot1](./screenshots/bamazonManagerProduct.png)
 
 * Manager adding more inventory to existing product
 
-![Shot1](./screenshots/bamazonManagerInventory)
+![Shot1](./screenshots/bamazonManagerInventory.png)
 
 * Supervisor checking sales by department
 
-![Shot1](./screenshots/bamazonSupervisorDepartment)
+![Shot1](./screenshots/bamazonSupervisorDepartment.png)
 
 * Supervisor adding new department
 
-![Shot1](./screenshots/bamazonSupervisorSales)
+![Shot1](./screenshots/bamazonSupervisorSales.png)
 
 
 ## Built With
